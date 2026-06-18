@@ -8,7 +8,7 @@ import Posts from "./pages/Posts/Posts";
 import Charts from "./pages/Charts/Charts";
 import Settings from "./pages/Settings/Settings";
 import NotFound from "./pages/NotFound/NotFound";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import EditUser from "./pages/EditUser/EditUser";
 
 import MainLayout from "./layout/MainLayout";
