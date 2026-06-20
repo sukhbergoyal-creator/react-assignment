@@ -17,7 +17,7 @@ function Navbar() {
           setIsMenuOpen(!isMenuOpen)
         }
       >
-        ☰
+        &#9776;
       </button>
 
       <div
@@ -35,16 +35,16 @@ function Navbar() {
           {t("users")}
         </Link>
 
-        <Link to="/posts">
-          {t("posts")}
-        </Link>
-
         <Link to="/charts">
           {t("charts")}
         </Link>
 
         <Link to="/settings">
           {t("settings")}
+        </Link>
+
+        <Link to="/logout">
+          {t("Logout")}
         </Link>
       </div>
     </nav>

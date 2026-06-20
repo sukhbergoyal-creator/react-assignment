@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import UserForm from "../../Components/UserForm";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { useContext } from "react";
+import UsersContext from "../../context/UsersContext";
 
 
 
@@ -15,7 +17,8 @@ function Users() {
     error,
   } = useFetch(getUsers);
 
-  const [localUsers, setLocalUsers] = useState([]);
+  const { users: localUsers, setUsers: setLocalUsers } =
+    useContext(UsersContext);
 
 
 
@@ -75,11 +78,19 @@ function Users() {
 
   const sortedUsers = [...filteredUsers];
   if (sortBy === "ageAsc") {
-    sortedUsers.sort((a, b) => a.age - b.age);
+    sortedUsers.sort(
+      (a, b) =>
+        calculateAge(a.birthDate) -
+        calculateAge(b.birthDate)
+    );
   }
 
   if (sortBy === "ageDesc") {
-    sortedUsers.sort((a, b) => b.age - a.age);
+    sortedUsers.sort(
+      (a, b) =>
+        calculateAge(b.birthDate) -
+        calculateAge(a.birthDate)
+    );
   }
 
   if (sortBy === "phoneAsc") {
@@ -109,9 +120,9 @@ function Users() {
       indexOfFirstUser,
       indexOfLastUser
     );
-  // const totalPages = Math.ceil(
-  //   sortedUsers.length / usersPerPage
-  // );
+    
+
+  
 
 
 
@@ -147,9 +158,21 @@ function Users() {
         },
       ],
     });
+    // https://github.com/GA-MO/react-confirm-alert
   }
 
   function handleEditSave() {
+    if (
+      !selectedUser.firstName?.trim() ||
+      !selectedUser.lastName?.trim() ||
+      !selectedUser.email?.includes("@")
+    ) {
+      alert(
+        "Please enter Valid Inputs"
+      );
+
+      return;
+    }
     const updatedUsers = localUsers.map((user) => {
       if (user.id === selectedUser.id) {
         return selectedUser;
@@ -195,6 +218,14 @@ function Users() {
     });
 
     setIsAddOpen(false);
+  }
+
+
+  function calculateAge(birthDate) {
+    return Math.floor(
+      (new Date() - new Date(birthDate)) /
+      (1000 * 60 * 60 * 24 * 365)
+    );
   }
 
 
@@ -259,6 +290,9 @@ function Users() {
         </thead>
 
         <tbody>
+          {currentUsers.length===0 &&(<tr>
+            <td>No Users Found</td>
+          </tr>)}
           {currentUsers.map((user) => (
             <tr key={user.id}>
               <td>
@@ -267,9 +301,16 @@ function Users() {
 
               <td>{user.email}</td>
 
-              <td style={{
-                color: user.age < 50 ? "red" : "green",
-              }}>{user.age}</td>
+              <td
+                style={{
+                  color:
+                    calculateAge(user.birthDate) < 50
+                      ? "red"
+                      : "green",
+                }}
+              >
+                {calculateAge(user.birthDate)}
+              </td>
 
               <td>{user.gender}</td>
 

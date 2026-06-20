@@ -12,16 +12,16 @@ export async function getUsers() {
   return data.users;
 }
 
-export async function getUserById(id) {
-  const response = await fetch(
-    `https://dummyjson.com/users/${id}`
-  );
+// export async function getUserById(id) {
+//   const response = await fetch(
+//     `https://dummyjson.com/users/${id}`
+//   );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch user");
-  }
+//   if (!response.ok) {
+//     throw new Error("Failed to fetch user");
+//   }
 
-  const user = await response.json();
+//   const user = await response.json();
 
-  return user;
-}
+//   return user;
+// }

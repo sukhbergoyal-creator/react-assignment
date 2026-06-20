@@ -1,22 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getUserById } from "../../services/userService";
+import { useContext } from "react";
+import UsersContext from "../../context/UsersContext";
 
 
 function UserDetails() {
   const { id } = useParams();
 
-  const [user, setUser] = useState(null);
+  const { users } = useContext(UsersContext);
 
-  useEffect(() => {
-    async function loadUser() {
-      const userData = await getUserById(id);
-
-      setUser(userData);
-    }
-
-    loadUser();
-  }, [id]);
+  const user = users.find(
+    (user) => user.id === Number(id)
+  );
 
   if (!user) {
     return <h2>Loading user...</h2>;

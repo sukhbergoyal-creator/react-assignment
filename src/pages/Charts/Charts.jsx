@@ -95,7 +95,7 @@ function Charts() {
   return (
     <div>
       <h1>Blood Group Chart</h1>
-
+{/* https://recharts.github.io/en-US/examples/SimpleBarChart/ */}
       <BarChart
         width={600}
         height={300}
@@ -114,6 +114,7 @@ function Charts() {
 
       <h1>Age Group Chart</h1>
 
+{/* https://recharts.github.io/en-US/examples/SimpleLineChart/ */}
       <LineChart
         width={600}
         height={300}

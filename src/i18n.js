@@ -7,7 +7,6 @@ i18n.use(initReactI18next).init({
   translation: {
     home: "Home",
     users: "Users",
-    posts: "Posts",
     charts: "Charts",
     settings: "Settings",
 
@@ -29,8 +28,6 @@ hi: {
     home: "होम",
 
     users: "उपयोगकर्ता",
-
-    posts: "पोस्ट",
 
     charts: "चार्ट",
 
